@@ -1,10 +1,11 @@
-import "./App.css";
-import Header from "./components/Header";
+import "./styles/style.css";
+
+import { Routes } from "./routes";
 
 function App() {
   return (
     <div className="App-header">
-      <Header />
+      <Routes/>
     </div>
   );
 }

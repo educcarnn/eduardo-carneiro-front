@@ -1,12 +1,13 @@
 import { Switch, BrowserRouter, Route } from "react-router-dom";
-import Cards from "../pages/Cards";
+
+import Itens from "../pages/Itens";
 
 export const Routes = () => {
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Cards />
+            <Itens />
           </Route>
         </Switch>
       </BrowserRouter>
