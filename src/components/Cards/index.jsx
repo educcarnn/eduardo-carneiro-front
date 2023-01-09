@@ -1,23 +1,29 @@
 import { useState } from "react";
 import { Api } from "../../services/api";
 import { useEffect } from "react";
+import { DivCards, DivCardsMain } from "./style";
 
 export default function Cards() {
   const [content, setContent] = useState([]);
+  const [films, setFilms] = useState([]);
 
   useEffect(() => {
     Api.get("people/").then((res) => {
       setContent(res.data.results);
-      console.log(res)
     });
   }, [content]);
 
-  console.log(content)
+  console.log(content);
+
   return (
-    <div>
+    <DivCardsMain>
       {content?.map((item) => (
-        <div>{item?.name}</div>
-      ))} 
-    </div>
+        <DivCards>
+          <p>Nome: {item?.name}</p>
+          <span>Aniversário: {item?.birth_year}</span>
+          <span>Massa: {item?.mass}</span >
+        </DivCards>
+      ))}
+    </DivCardsMain>
   );
 }
