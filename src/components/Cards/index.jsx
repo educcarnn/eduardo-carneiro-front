@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Api, ApiPages } from "../../services/api";
+import { Api } from "../../services/api";
 import { useEffect } from "react";
-import { DivApp, DivCards, DivCardsMain, DivMain } from "./style";
+import { DivApp, DivMain } from "./style";
 import ReactLoading from "react-loading";
 
 export default function Cards({ type, color, itemsPerPage }) {

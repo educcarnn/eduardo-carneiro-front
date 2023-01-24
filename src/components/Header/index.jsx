@@ -2,7 +2,7 @@ import { HeaderDiv } from "./style";
 
 export default function Header() {
   return (
-    <div>
+  <div>
       <HeaderDiv>
         <div>
           <select name="Escolha de acordo com gênero" id=""></select>
@@ -14,6 +14,6 @@ export default function Header() {
         </div>
       </HeaderDiv>
       
-    </div>
+    </div>  
   );
 }
