@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const StarWarsContext = createContext();
 
-function StarWarsProvider ({ children }) {
+const StarWarsProvider = ({ children }) => {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
@@ -20,3 +20,4 @@ function StarWarsProvider ({ children }) {
 };
 
 export { StarWarsContext, StarWarsProvider };
+
