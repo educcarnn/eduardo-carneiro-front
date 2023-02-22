@@ -7,9 +7,11 @@ export default function Itens(){
 
     return (
         <div>
+            
             <Header/>
             <Cards/>
             <Pagination/>
+            
         </div>
     )
 }

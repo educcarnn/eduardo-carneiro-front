@@ -1,13 +1,13 @@
-import "./styles/style.css";
+import { StarWarsProvider } from './context/StarWarsContext';
+import CharacterList from './components/CharacterList';
 
-import { Routes } from "./routes";
-
-function App() {
+//
+function App () {
   return (
-    <div className="App-header">
-      <Routes />
-    </div>
+    <StarWarsProvider>
+      <CharacterList />
+    </StarWarsProvider>
   );
-}
+};
 
 export default App;
