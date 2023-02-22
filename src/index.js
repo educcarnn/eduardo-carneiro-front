@@ -2,13 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./App";
-import { StarWarsProvider } from "./context/StarWarsContext";
+
+import { CharacterProvider } from "./context/CharacterContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <StarWarsProvider>
+    <CharacterProvider>
       <App />
-    </StarWarsProvider>
+    </CharacterProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

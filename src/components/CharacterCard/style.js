@@ -11,6 +11,14 @@ export const Name = styled.h2`
   margin: 0;
 `;
 
+export const Image = styled.img`
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 16px;
+`
+
 export const Attribute = styled.p`
   margin: 0;
 `;
