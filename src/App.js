@@ -1,13 +1,13 @@
-import { StarWarsProvider } from './context/StarWarsContext';
-import CharacterList from './components/CharacterList';
+import React from "react";
 
-//
-function App () {
+import CharacterCard from "./components/CharacterCard";
+
+function App() {
   return (
-    <StarWarsProvider>
-      <CharacterList />
-    </StarWarsProvider>
+    <div>
+      <CharacterCard />
+    </div>
   );
-};
+}
 
 export default App;

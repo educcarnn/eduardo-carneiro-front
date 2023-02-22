@@ -1,15 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import App from "./App";
+import { StarWarsProvider } from "./context/StarWarsContext";
+
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <StarWarsProvider>
+      <App />
+    </StarWarsProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
-
-
-reportWebVitals();
