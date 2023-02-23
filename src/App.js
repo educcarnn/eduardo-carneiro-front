@@ -1,10 +1,12 @@
-import React from "react";
+
 import CharacterCard from "./components/CharacterCard";
+import Pagination from "./components/Pagination";
 
 function App() {
   return (
     <div>
       <CharacterCard />
+
     </div>
   );
 }

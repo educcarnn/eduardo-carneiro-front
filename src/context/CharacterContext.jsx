@@ -1,31 +1,35 @@
-import React, { createContext, useState } from 'react';
-import { fetchCharacters } from '../services/api';
+import { createContext, useState, useEffect } from 'react';
+import { getCharacters } from '../../src/services/api.js';
 
-import { fetchCharacter } from '../services/api';
 export const CharacterContext = createContext();
 
-export function CharacterProvider(props) {
-  const [character, setCharacter] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+export function CharacterProvider({children}) {
+  const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState(1);
 
   
-  async function getCharacter(id) {
-    const data = await fetchCharacter(id);
-    setCharacter(data);
-  }
+  const loadCharacters = async () => {
+    const data = await getCharacters(page);
+    setCharacters(data.results);
+  };
 
-  async function getCharacters(page) {
-    const data = await fetchCharacters(page);
-    setCharacter(null);
-    setCurrentPage(page);
-    setTotalPages(Math.ceil(data.count / 10));
-    setCharacter(data.results);
-  }
+  useEffect(() => {
+    loadCharacters();
+  }, [page]);
 
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const previousPage = () => {
+    setPage(page - 1);
+  };
+
+
+  
   return (
-    <CharacterContext.Provider value={{ character, getCharacter, getCharacters, currentPage, totalPages }}>
-      {props.children}
+    <CharacterContext.Provider value={{ characters, nextPage, previousPage }}>
+      {children}
     </CharacterContext.Provider>
   );
 }
