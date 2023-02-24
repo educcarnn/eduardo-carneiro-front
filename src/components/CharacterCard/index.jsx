@@ -1,33 +1,68 @@
-import { useContext } from "react";
-
-//import { Card, Name, Attribute } from "./style.js";
-
-import { getCharacterId } from "../../utils/GetCharacteredId.jsx";
-import { Image } from "./style.js";
-
+import { Card, Name, Attribute } from "./style.js";
+import { useContext, useState } from "react";
 import { CharacterContext } from "../../context/CharacterContext.jsx";
+import { getCharacterId } from "../../utils/GetCharacteredId.jsx";
 import Pagination from "../Pagination/index.jsx";
+import { Image } from "./style.js";
+import { CharacterModal } from "../Modal/index.jsx";
 
 const CharacterCard = () => {
   const { characters } = useContext(CharacterContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const { setSelectedCharacter, handleCardClick } =
+    useContext(CharacterContext);
+
+  // Modal
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  //Filtro
+  /*
+
+
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  let filteredCharacters = characters;
+
+  if (selectedFilter === "gender") {
+    filteredCharacters = characters.filter(
+      (character) => character.gender === "male"
+    );
+  } else if (selectedFilter === "species") {
+    filteredCharacters = characters.filter(
+      (character) => character.species === "Human"
+    );
+  } else if (selectedFilter === "films") {
+    filteredCharacters = characters.filter(
+      (character) => character.films.length > 1
+    );
+  }
+*/
 
   return (
     <div>
-      {characters.map((character) => (
-        <div key={character.name}>
-          <h2>{character.name}</h2>
-          <Image
-            src={`https://starwars-visualguide.com/assets/img/characters/${getCharacterId(
-              character.url
-            )}.jpg`}
-          />
-          <p>Height: {character.height}</p>
-          <p>Mass: {character.mass}</p>
-          <p>Hair color: {character.hair_color}</p>
-          <p>Skin color: {character.skin_color}</p>
-        </div>
-      ))}
-
+      <ul>
+        {characters.map((characters) => (
+          <Card key={characters.name}>
+            <Name>{characters.name}</Name>
+            <Image
+              src={`https://starwars-visualguide.com/assets/img/characters/${getCharacterId(
+                characters.url
+              )}.jpg`}
+            />
+            <Attribute>Altura {characters.height}</Attribute>
+            <Attribute>Massa {characters.mass}</Attribute>
+            <Attribute>Cor do cabelo {characters.hair_color}</Attribute>
+            <Attribute>Cor da pele {characters.skin_color}</Attribute>
+            <button onClick={handleCardClick}>Mais informaçõess</button>
+          </Card>
+        ))}
+      </ul>
+      {}
       <Pagination />
     </div>
   );

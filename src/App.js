@@ -1,12 +1,12 @@
 
 import CharacterCard from "./components/CharacterCard";
-import Pagination from "./components/Pagination";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
+      <Header/>
       <CharacterCard />
-
     </div>
   );
 }
