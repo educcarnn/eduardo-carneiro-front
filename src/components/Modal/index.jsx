@@ -1,17 +1,23 @@
-import ReactModal from 'react-modal';
+import React, { useContext } from "react";
+import { CharacterContext } from "../../context/CharacterContext.jsx";
+import { CloseButton, Overlay, ModalContainer } from "./style";
 
-export  const CharacterModal = ({ character, isOpen, onRequestClose }) => {
+export const CharacterModal = ({ isOpen, onRequestClose }) => {
+  const { modalIsOpen, setModalIsOpen, selectedCharacter } =
+    useContext(CharacterContext);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="Informações adicionais"
-    >
-      <h2>{character.name}</h2>
-      <p>Gênero: {character.gender}</p>
-      <p>Espécie: {character.species}</p>
-      <p>Aparições em filmes: {character.films.length}</p>
-      <button onClick={onRequestClose}>Fechar</button>
-    </ReactModal>
+    <Overlay>
+      <ModalContainer>
+        <h2>{selectedCharacter.name}</h2>
+        <p>Cor do olho {selectedCharacter.eye_color}</p>
+        <p>Peso {selectedCharacter.mass}</p>
+        <CloseButton onClick={closeModal}>Fechar</CloseButton>
+      </ModalContainer>
+    </Overlay>
   );
 };

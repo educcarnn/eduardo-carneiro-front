@@ -8,15 +8,9 @@ import { CharacterModal } from "../Modal/index.jsx";
 
 const CharacterCard = () => {
   const { characters } = useContext(CharacterContext);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("");
-  const { setSelectedCharacter, handleCardClick } =
-    useContext(CharacterContext);
-
-  // Modal
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+  const { setSelectedCharacter, handleCardClick } = useContext(CharacterContext);
+  const {modalIsOpen, setModalIsOpen} = useContext(CharacterContext);
 
   //Filtro
   /*
@@ -42,6 +36,7 @@ const CharacterCard = () => {
     );
   }
 */
+  console.log(modalIsOpen)
 
   return (
     <div>
@@ -58,11 +53,17 @@ const CharacterCard = () => {
             <Attribute>Massa {characters.mass}</Attribute>
             <Attribute>Cor do cabelo {characters.hair_color}</Attribute>
             <Attribute>Cor da pele {characters.skin_color}</Attribute>
-            <button onClick={handleCardClick}>Mais informaçõess</button>
+            <button onClick={() => handleCardClick(characters)}>Mais informações</button>
           </Card>
         ))}
       </ul>
-      {}
+      {modalIsOpen ? (
+        <div>
+          <CharacterModal/>
+        </div>
+      ) : (
+        <></>
+      )}
       <Pagination />
     </div>
   );

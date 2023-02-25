@@ -7,7 +7,7 @@ export function CharacterProvider({ children }) {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [page, setPage] = useState(1);
-  const [ModalIsOpen, setModalIsOpen] = useState(true)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   //Paginação
   const loadCharacters = async () => {
@@ -29,10 +29,11 @@ export function CharacterProvider({ children }) {
 
   //Modal
   const selectCharacter = (id) => {
-    const character = characters.find((char) => char.id === id);
-    setSelectedCharacter(character);
+    if (characters.length > 0) {
+      const character = characters.find((char) => char.id === id);
+      setSelectedCharacter(character);
+    }
   };
-
   const deselectCharacter = () => {
     setSelectedCharacter(null);
   };
@@ -45,6 +46,8 @@ export function CharacterProvider({ children }) {
   return (
     <CharacterContext.Provider
       value={{
+        modalIsOpen,
+        setModalIsOpen,
         characters,
         nextPage,
         previousPage,
@@ -52,6 +55,7 @@ export function CharacterProvider({ children }) {
         deselectCharacter,
         handleCardClick,
         setSelectedCharacter,
+        selectedCharacter
       }}
     >
       {children}
