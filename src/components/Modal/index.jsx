@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { CharacterContext } from "../../context/CharacterContext.jsx";
 import { CloseButton, Overlay, ModalContainer } from "./style";
 
-export const CharacterModal = ({ isOpen, onRequestClose }) => {
-  const { modalIsOpen, setModalIsOpen, selectedCharacter } =
+export const CharacterModal = () => {
+  const { setModalIsOpen, selectedCharacter } =
     useContext(CharacterContext);
 
   const closeModal = () => {

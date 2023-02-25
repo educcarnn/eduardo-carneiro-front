@@ -1,13 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 import { getCharacters } from "../../src/services/api.js";
-
+import { useHistory } from "react-router-dom";
 export const CharacterContext = createContext();
 
 export function CharacterProvider({ children }) {
+  const history = useHistory();
+
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [page, setPage] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   //Paginação
   const loadCharacters = async () => {
@@ -32,15 +34,22 @@ export function CharacterProvider({ children }) {
     if (characters.length > 0) {
       const character = characters.find((char) => char.id === id);
       setSelectedCharacter(character);
+      history.push(`/character/${id}`);
     }
   };
+
   const deselectCharacter = () => {
     setSelectedCharacter(null);
+    history.push("/");
   };
 
   const handleCardClick = (characters) => {
     setSelectedCharacter(characters);
     setModalIsOpen(true);
+  };
+
+  const handlePageClick = (id) => {
+    selectCharacter(id);
   };
 
   return (
@@ -55,7 +64,8 @@ export function CharacterProvider({ children }) {
         deselectCharacter,
         handleCardClick,
         setSelectedCharacter,
-        selectedCharacter
+        selectedCharacter,
+        handlePageClick,
       }}
     >
       {children}
