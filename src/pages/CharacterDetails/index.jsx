@@ -14,6 +14,7 @@ export default function CharacterDetails() {
     console.log(selectedCharacter);
   }, [selectedCharacter]);
 
+ 
 
 
   return (
@@ -29,7 +30,7 @@ export default function CharacterDetails() {
           <div>{selectedCharacter.mass}</div>
           <div>{selectedCharacter.hair_color}</div>
           <div>{selectedCharacter.skin_color}</div>
-          {/* inclua aqui os outros campos */}
+          <button>Voltar</button>
         </div>
       )}
     </div>
