@@ -8,16 +8,14 @@ import { Image } from "./style.js";
 import { CharacterModal } from "../Modal/index.jsx";
 
 const CharacterCard = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   const { characters } = useContext(CharacterContext);
   const [selectedFilter, setSelectedFilter] = useState("");
-  const { handleCardClick, } = useContext(CharacterContext);
+  const { handleCardClick, searchedCharacters } = useContext(CharacterContext);
   const { modalIsOpen } = useContext(CharacterContext);
 
-  const handlePageClick = (characters) => {
-    history.push(`/characters/${getCharacterId(characters.url)}`)
-  }
+
   //Filtro
   /*
 
@@ -43,28 +41,62 @@ const CharacterCard = () => {
   }
 */
 
-
   return (
     <div>
       <ul>
-        {characters.map((characters) => (
-          <Card key={characters.name} >
-            <Name>{characters.name}</Name>
-            <Image
-              src={`https://starwars-visualguide.com/assets/img/characters/${getCharacterId(
-                characters.url
-              )}.jpg`}
-            />
-            <Attribute>Altura {characters.height}</Attribute>
-            <Attribute>Massa {characters.mass}</Attribute>
-            <Attribute>Cor do cabelo {characters.hair_color}</Attribute>
-            <Attribute>Cor da pele {characters.skin_color}</Attribute>
-            <button  onClick={() => handleCardClick(characters)}>
-              Mais informações
-            </button>
-            <button onClick={() => history.push(`/characters/${getCharacterId(characters.url)}`)}>Clique aqui</button>
-          </Card>
-        ))}
+        {searchedCharacters.length !== 0 ? (
+          searchedCharacters.map((character) => (
+            <Card key={character.name}>
+              <Name>{character.name}</Name>
+              <Image
+                src={`https://starwars-visualguide.com/assets/img/characters/${getCharacterId(
+                  character.url
+                )}.jpg`}
+              />
+              <Attribute>Altura {character.height}</Attribute>
+              <Attribute>Massa {character.mass}</Attribute>
+              <Attribute>Cor do cabelo {character.hair_color}</Attribute>
+              <Attribute>Cor da pele {character.skin_color}</Attribute>
+              <button onClick={() => handleCardClick(character)}>
+                Mais informações
+              </button>
+              <button
+                onClick={() =>
+                  history.push(`/characters/${getCharacterId(character.url)}`)
+                }
+              >
+                Clique aqui
+              </button>
+            </Card>
+          ))
+        ) : characters.length > 0 ? (
+          characters.map((character) => (
+            <Card key={character.name}>
+              <Name>{character.name}</Name>
+              <Image
+                src={`https://starwars-visualguide.com/assets/img/characters/${getCharacterId(
+                  character.url
+                )}.jpg`}
+              />
+              <Attribute>Altura {character.height}</Attribute>
+              <Attribute>Massa {character.mass}</Attribute>
+              <Attribute>Cor do cabelo {character.hair_color}</Attribute>
+              <Attribute>Cor da pele {character.skin_color}</Attribute>
+              <button onClick={() => handleCardClick(character)}>
+                Mais informações
+              </button>
+              <button
+                onClick={() =>
+                  history.push(`/characters/${getCharacterId(character.url)}`)
+                }
+              >
+                Clique aqui
+              </button>
+            </Card>
+          ))
+        ) : (
+          <p>Carregando...</p>
+        )}
       </ul>
       {modalIsOpen ? (
         <div>

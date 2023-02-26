@@ -11,6 +11,7 @@ export function CharacterProvider({ children }) {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [page, setPage] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [searchName, setSearchName] = useState("");
 
 
   const loadCharacters = async () => {
@@ -58,6 +59,9 @@ export function CharacterProvider({ children }) {
         deselectCharacter,
         handleCardClick,
         setSelectedCharacter,
+        searchName,
+        setCharacters,
+        setSearchName,
         selectedCharacter,
   
       }}

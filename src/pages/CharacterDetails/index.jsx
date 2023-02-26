@@ -1,42 +1,42 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CharacterContext } from "../../context/CharacterContext";
 
-import { useHistory } from "react-router-dom";
-
-export default function CharacterDetails() {
-  const { selectedCharacter, selectCharacter, characters } =
-    useContext(CharacterContext);
+import { getCharacterById } from "../../services/api";
+import { Link } from "react-router-dom";
+import Header from "../../components/Header";
+const CharacterDetail = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (id && characters.length > 0) {
-      const character = characters.find((char) => char.id === parseInt(id));
-      selectCharacter(character);
-    }
-  }, [id, characters, selectCharacter]);
+    const loadCharacter = async () => {
+      const character = await getCharacterById(id);
+      setSelectedCharacter(character);
+      setLoading(false);
+    };
+    loadCharacter();
+  }, [id]);
 
-  const handleGoBack = () => {
-    history.goBack();
-  };
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
 
   return (
-    <div>
-      {!selectedCharacter ? (
-        <div>
-          <div>Carregando...</div>
-        </div>
-      ) : (
-        <div>
-          <div>{selectedCharacter.name}</div>
-          <div>{selectedCharacter.height}</div>
-          <div>{selectedCharacter.mass}</div>
-          <div>{selectedCharacter.hair_color}</div>
-          <div>{selectedCharacter.skin_color}</div>
-          <button onClick={handleGoBack}>Voltar</button>
-        </div>
+    <>
+      {selectedCharacter && (
+        <>
+        <Header/>
+          <h2>{selectedCharacter.name}</h2>
+          <p>Altura: {selectedCharacter.height}</p>
+          <p>Peso: {selectedCharacter.mass}</p>
+          <p>Cor do cabelo: {selectedCharacter.hair_color}</p>
+          <p>Cor da pele: {selectedCharacter.skin_color}</p>
+          <Link to="/">Voltar</Link>
+        </>
       )}
-    </div>
+    </>
   );
-}
+};
+
+export default CharacterDetail;
