@@ -7,7 +7,7 @@ export function CharacterProvider({ children }) {
   const history = useHistory();
 
   const [characters, setCharacters] = useState([]);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState([]);
   const [page, setPage] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -32,24 +32,20 @@ export function CharacterProvider({ children }) {
   //Modal
   const selectCharacter = (id) => {
     if (characters.length > 0) {
-      const character = characters.find((char) => char.id === id);
+      const character = characters.find((char) => char.id === parseInt(id));
       setSelectedCharacter(character);
-      history.push(`/character/${id}`);
     }
   };
-
+  
   const deselectCharacter = () => {
     setSelectedCharacter(null);
     history.push("/");
   };
 
+
   const handleCardClick = (characters) => {
     setSelectedCharacter(characters);
     setModalIsOpen(true);
-  };
-
-  const handlePageClick = (id) => {
-    selectCharacter(id);
   };
 
   return (
@@ -65,7 +61,7 @@ export function CharacterProvider({ children }) {
         handleCardClick,
         setSelectedCharacter,
         selectedCharacter,
-        handlePageClick,
+  
       }}
     >
       {children}

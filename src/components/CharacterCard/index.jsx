@@ -1,4 +1,5 @@
 import { Card, Name, Attribute } from "./style.js";
+import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CharacterContext } from "../../context/CharacterContext.jsx";
 import { getCharacterId } from "../../utils/GetCharacteredId.jsx";
@@ -7,6 +8,8 @@ import { Image } from "./style.js";
 import { CharacterModal } from "../Modal/index.jsx";
 
 const CharacterCard = () => {
+  const history = useHistory()
+
   const { characters } = useContext(CharacterContext);
   const [selectedFilter, setSelectedFilter] = useState("");
   const { handleCardClick, handlePageClick } = useContext(CharacterContext);
@@ -37,11 +40,12 @@ const CharacterCard = () => {
   }
 */
 
+
   return (
     <div>
       <ul>
         {characters.map((characters) => (
-          <Card key={characters.name}>
+          <Card key={characters.name} >
             <Name>{characters.name}</Name>
             <Image
               src={`https://starwars-visualguide.com/assets/img/characters/${getCharacterId(
@@ -52,12 +56,10 @@ const CharacterCard = () => {
             <Attribute>Massa {characters.mass}</Attribute>
             <Attribute>Cor do cabelo {characters.hair_color}</Attribute>
             <Attribute>Cor da pele {characters.skin_color}</Attribute>
-            <button onClick={() => handleCardClick(characters)}>
+            <button  onClick={() => handleCardClick(characters)}>
               Mais informações
             </button>
-            <button onClick={() => handlePageClick(characters.id)}>
-              Página do personagem
-            </button>
+            <button onClick={() => history.push(`/characters/${getCharacterId(characters.url)}`)}>Clique aqui</button>
           </Card>
         ))}
       </ul>

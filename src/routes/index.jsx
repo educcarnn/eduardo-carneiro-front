@@ -1,6 +1,6 @@
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
-import CharacterDetails from "../pages/CharacteresDetails";
+import CharacterDetails from "../pages/CharacterDetails";
 
 function Routes() {
   return (
@@ -9,7 +9,7 @@ function Routes() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/character/:id">
+        <Route path="/characters/:id">
           <CharacterDetails />
         </Route>
       </Switch>
