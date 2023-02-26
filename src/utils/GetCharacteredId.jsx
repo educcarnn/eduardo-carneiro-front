@@ -1,5 +1,4 @@
 export const getCharacterId = (url) => {
-    const matches = url.match(/\/([0-9]*)\/$/);
-    return matches[1];
+  const segments = url.split("/").filter(Boolean);
+  return segments[segments.length - 1];
 };
-  

@@ -3,10 +3,19 @@ import axios from "axios";
 export const API_URL = "https://swapi.dev/api/";
 
 export const getCharacters = async (page) => {
-  const response = await axios.get(`${API_URL}/people/?page=${page}`);
-  return response.data;
-};
+  const url = `${API_URL}people/?page=${page}`
+  const response = await axios.get(url);
+  const data = response.data;
+  return data;
+}
 
+export const getCharacterById = async (id) => {
+  const response = await axios.get(`${API_URL}people/${id}/`);
+  const data = response.data;
+  return data;
+}
+
+/*
 export const getGenres = async () => {
   const response = await axios.get(`${API_URL}/people/`);
   const characters = response.data.results;
@@ -28,3 +37,4 @@ export const getFilms = async () => {
   const response = await axios.get(`${API_URL}/films/`);
   return response.data.results;
 };
+*/

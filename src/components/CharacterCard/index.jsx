@@ -12,9 +12,12 @@ const CharacterCard = () => {
 
   const { characters } = useContext(CharacterContext);
   const [selectedFilter, setSelectedFilter] = useState("");
-  const { handleCardClick, handlePageClick } = useContext(CharacterContext);
+  const { handleCardClick, } = useContext(CharacterContext);
   const { modalIsOpen } = useContext(CharacterContext);
 
+  const handlePageClick = (characters) => {
+    history.push(`/characters/${getCharacterId(characters.url)}`)
+  }
   //Filtro
   /*
 
